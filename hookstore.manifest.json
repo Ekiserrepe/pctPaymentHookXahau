@@ -18,7 +18,47 @@
   "hooks": [
     {
       "id": "main",
-      "abi": {},
+      "abi": {
+  "notes": "Percentage-based payment splitter hook. Forwards a configured percentage of incoming native XAH payments to a destination account. Both PCT and DST parameters are actively used in code and validated.",
+  "hookParameters": [
+    {
+      "name": "PCT",
+      "description": "Percentage of incoming payment to forward to destination (1-100)",
+      "selector": [
+        {
+          "type": "VarString",
+          "pattern": "PCT",
+          "patternEncoding": "ascii"
+        }
+      ],
+      "data": [
+        {
+          "type": "UInt8",
+          "label": "percentage"
+        }
+      ],
+      "notes": "Valid range: 1-100. Values outside this range are rejected. Used in calculation: forward_drops = (drops * pct) / 100"
+    },
+    {
+      "name": "DST",
+      "description": "Destination account to receive forwarded payment",
+      "selector": [
+        {
+          "type": "VarString",
+          "pattern": "DST",
+          "patternEncoding": "ascii"
+        }
+      ],
+      "data": [
+        {
+          "type": "AccountID",
+          "label": "destination_account"
+        }
+      ],
+      "notes": "20-byte account ID. Cannot be the same as the hook account. Validated against hook_account() to prevent self-forwarding."
+    }
+  ]
+},
       "artifact": {
         "toolchain": "hooks-c",
         "source_path": "pct_split_payment.c"
