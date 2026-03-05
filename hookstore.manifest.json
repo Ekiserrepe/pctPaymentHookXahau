@@ -18,6 +18,7 @@
   "hooks": [
     {
       "id": "main",
+      "abi": {},
       "artifact": {
         "toolchain": "hooks-c",
         "source_path": "pct_split_payment.c"
