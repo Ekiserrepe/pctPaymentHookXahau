@@ -1,6 +1,6 @@
-# pct_split_payment — Xahau Hook
+# Percentage Split XAH Payment: Xahau Hook
 
-A Xahau Hook that automatically forwards a configurable percentage of every incoming native XAH payment to a designated destination account.
+A Xahau Hook that automatically forwards a configurable percentage of every incoming native XAH payment to a designated destination account for Xahau blockchain.
 
 ## Overview
 
