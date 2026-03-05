@@ -1,0 +1,61 @@
+{
+  "manifestVersion": "1",
+  "name": "pctpaymenthookxahau",
+  "version": "1.0.0",
+  "description": "Upon receiving an incoming native XAH payment, automatically forwards a configurable percentage to a destination account.",
+  "publisher": "rNybLYJ4koM8PF3dJbyUZhrgYntGxf1nEk",
+  "repo": "https://github.com/Ekiserrepe/pctPaymentHookXahau",
+  "networks": [
+    "xahau-testnet",
+    "xahau-mainnet"
+  ],
+  "roles": {
+    "installer": {
+      "label": "Installer Account",
+      "description": "The account installing the hook"
+    }
+  },
+  "hooks": [
+    {
+      "id": "main",
+      "artifact": {
+        "toolchain": "hooks-c",
+        "source_path": "pct_split_payment.c"
+      },
+      "HookOn": [
+        "PAYMENT"
+      ],
+      "HookCanEmit": [
+        "PAYMENT"
+      ],
+      "HookParameters": [
+        {
+          "HookParameterName": "PCT",
+          "HookParameterValue": {
+            "type": "uint8",
+            "value": 10
+          }
+        },
+        {
+          "HookParameterName": "DST",
+          "HookParameterValue": {
+            "type": "account",
+            "value": "rf1NrYAsv92UPDd8nyCG4A3bez7dhYE61r",
+            "encoding": "hex"
+          }
+        }
+      ]
+    }
+  ],
+  "install": [
+    {
+      "TransactionType": "SetHook",
+      "description": "Install main hook",
+      "required": true,
+      "role": "installer",
+      "hookIds": [
+        "main"
+      ]
+    }
+  ]
+}
